@@ -1,0 +1,1 @@
+-- Seed Chart of Accounts data will be added in Phase 1.

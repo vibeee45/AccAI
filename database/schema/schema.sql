@@ -1,0 +1,2 @@
+-- ACCAI database schema will be implemented in Phase 1.
+-- See DATABASE_INFO.md for the planned entities and integrity rules.

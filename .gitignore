@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Node/frontend placeholder
+node_modules/
+.next/
+
+# Data/model artifacts
+*.pkl
+*.joblib
+*.pt
+*.onnx
+ml/data/raw/*
+ml/data/processed/*
+ml/models/trained/*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
