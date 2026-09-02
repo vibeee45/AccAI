@@ -57,23 +57,17 @@ class JournalService:
         validate_balanced_entry(data.lines)
 
         # 2. Validate transaction ownership.
-        if data.transaction_id is not None:
-
-            transaction = (
-                self.transaction_repository.get_by_id(
-                    data.transaction_id
-                )
+        transaction = self.transaction_repository.get_by_id(
+            data.transaction_id
             )
 
-            if transaction is None:
-                raise ValueError(
-                    "Transaction not found"
-                )
+        if transaction is None:
+            raise ValueError("Transaction not found")
 
-            if transaction.company_id != data.company_id:
-                raise ValueError(
-                    "Transaction does not belong to the company"
-                )
+        if transaction.company_id != data.company_id:
+            raise ValueError(
+        "Transaction does not belong to the company"
+    )
 
         # 3. Validate every account.
         for line in data.lines:

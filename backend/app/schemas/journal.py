@@ -79,7 +79,7 @@ class JournalEntryUpdate(BaseModel):
 class JournalEntryResponse(JournalEntryBase):
     id: UUID
     company_id: UUID
-    transaction_id: UUID | None
+    transaction_id: UUID 
     entry_number: int
     created_at: datetime
     lines: list[JournalLineResponse] = []

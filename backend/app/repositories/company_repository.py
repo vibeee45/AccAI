@@ -19,10 +19,13 @@ class CompanyRepository:
             Company.name == name
         )
 
-        return self.db.scalar(statement)
+        return self.db.scalars(statement).first()
 
     def list_all(self) -> list[Company]:
-        statement = select(Company).order_by(Company.name)
+        statement = (
+            select(Company)
+            .order_by(Company.name)
+        )
 
         return list(self.db.scalars(statement).all())
 
@@ -55,7 +58,7 @@ class CompanyRepository:
             CompanyUser.user_id == user_id,
         )
 
-        return self.db.scalar(statement)
+        return self.db.scalars(statement).first()
 
     def list_members(
         self,
