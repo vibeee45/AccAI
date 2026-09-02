@@ -1,19 +1,7 @@
 services:
-  postgres:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: accai
-      POSTGRES_USER: accai
-      POSTGRES_PASSWORD: accai
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
   redis:
     image: redis:7
+    container_name: accai-redis
     ports:
       - "6379:6379"
-
-volumes:
-  postgres_data:
+    restart: unless-stopped

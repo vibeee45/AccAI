@@ -1,4 +1,10 @@
-from pydantic_settings import BaseSettings
+from pathlib import Path
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+BASE_DIR = Path(__file__).resolve().parents[3]
+
 
 class Settings(BaseSettings):
     database_url: str
@@ -6,7 +12,11 @@ class Settings(BaseSettings):
     jwt_secret_key: str = "change_me"
     environment: str = "development"
 
-    class Config:
-        env_file = ".env"
+    model_config = SettingsConfigDict(
+        env_file=BASE_DIR / ".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+    )
+
 
 settings = Settings()
