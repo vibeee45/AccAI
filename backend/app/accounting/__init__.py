@@ -6,7 +6,12 @@ from app.accounting.normalization import (
     normalize_description,
     normalize_transaction,
 )
-
+from app.accounting.trial_balance import (
+    TrialBalance,
+    TrialBalanceRow,
+    generate_trial_balance,
+    get_trial_balance_row,
+)
 from app.accounting.validators import (
     AccountingValidationError,
     validate_balanced_entry,
@@ -65,4 +70,9 @@ __all__ = [
     "post_journals_to_ledger",
     "get_account_balance",
     "get_trial_balance_totals",
+
+    "TrialBalance",
+    "TrialBalanceRow",
+    "generate_trial_balance",
+    "get_trial_balance_row",
 ]
