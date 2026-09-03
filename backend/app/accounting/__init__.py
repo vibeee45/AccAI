@@ -6,22 +6,7 @@ from app.accounting.normalization import (
     normalize_description,
     normalize_transaction,
 )
-from app.accounting.trial_balance import (
-    TrialBalance,
-    TrialBalanceRow,
-    generate_trial_balance,
-    get_trial_balance_row,
-)
-from app.accounting.pnl import (
-    ProfitLoss,
-    ProfitLossError,
-    generate_pnl,
-    generate_pnl_from_trading,
-    get_net_profit,
-    get_net_loss,
-    get_total_income,
-    get_total_expenses,
-)
+
 from app.accounting.validators import (
     AccountingValidationError,
     validate_balanced_entry,
@@ -48,6 +33,47 @@ from app.accounting.ledger import (
     post_journals_to_ledger,
 )
 
+from app.accounting.trial_balance import (
+    TrialBalance,
+    TrialBalanceRow,
+    generate_trial_balance,
+    get_trial_balance_row,
+)
+
+from app.accounting.trading import (
+    TradingAccount,
+    TradingAccountError,
+    generate_trading_account,
+    get_cost_of_goods_sold,
+    get_gross_loss,
+    get_gross_profit,
+    get_net_purchases,
+    get_net_sales,
+)
+
+from app.accounting.pnl import (
+    ProfitLoss,
+    ProfitLossError,
+    generate_pnl,
+    generate_pnl_from_trading,
+    get_net_profit,
+    get_net_loss,
+    get_total_income,
+    get_total_expenses,
+)
+
+from app.accounting.balance_sheet import (
+    BalanceSheet,
+    BalanceSheetError,
+    BalanceSheetItem,
+    generate_balance_sheet,
+    generate_balance_sheet_from_pnl,
+    get_total_assets,
+    get_total_liabilities,
+    get_adjusted_capital,
+    get_total_equity,
+    get_balance_sheet_difference,
+)
 
 __all__ = [
     # Normalization
@@ -81,11 +107,23 @@ __all__ = [
     "get_account_balance",
     "get_trial_balance_totals",
 
+    # Trial Balance
     "TrialBalance",
     "TrialBalanceRow",
     "generate_trial_balance",
     "get_trial_balance_row",
 
+    # Trading Account
+    "TradingAccount",
+    "TradingAccountError",
+    "generate_trading_account",
+    "get_cost_of_goods_sold",
+    "get_gross_loss",
+    "get_gross_profit",
+    "get_net_purchases",
+    "get_net_sales",
+
+    # Profit & Loss
     "ProfitLoss",
     "ProfitLossError",
     "generate_pnl",
@@ -94,4 +132,17 @@ __all__ = [
     "get_net_loss",
     "get_total_income",
     "get_total_expenses",
+
+
+        # Balance Sheet
+    "BalanceSheet",
+    "BalanceSheetError",
+    "BalanceSheetItem",
+    "generate_balance_sheet",
+    "generate_balance_sheet_from_pnl",
+    "get_total_assets",
+    "get_total_liabilities",
+    "get_adjusted_capital",
+    "get_total_equity",
+    "get_balance_sheet_difference",
 ]
