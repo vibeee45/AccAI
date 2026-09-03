@@ -51,14 +51,53 @@ def validate_debit_credit(
         )
 
 
+def _extract_debit_credit(line) -> tuple[Decimal, Decimal]:
+    """
+    Extract debit and credit amounts from either:
+
+    1. A tuple/list:
+       (debit, credit)
+
+    2. An object containing:
+       line.debit
+       line.credit
+
+    This keeps the accounting engine compatible with
+    both pure accounting objects and Pydantic schemas.
+    """
+
+    if hasattr(line, "debit") and hasattr(line, "credit"):
+        return (
+            Decimal(str(line.debit)),
+            Decimal(str(line.credit)),
+        )
+
+    if isinstance(line, (tuple, list)) and len(line) == 2:
+        return (
+            Decimal(str(line[0])),
+            Decimal(str(line[1])),
+        )
+
+    raise AccountingValidationError(
+        "Invalid journal line. Expected "
+        "(debit, credit) or an object with debit and credit."
+    )
+
+
 def validate_balanced_entry(
-    lines: Iterable[tuple[Decimal, Decimal]],
+    lines: Iterable,
 ) -> None:
     """
     Validate that total debits equal total credits.
 
-    Each item must be:
+    Supports both:
+
         (debit, credit)
+
+    and objects with:
+
+        .debit
+        .credit
     """
 
     lines = list(lines)
@@ -68,11 +107,16 @@ def validate_balanced_entry(
             "A journal entry must contain at least two lines."
         )
 
-    total_debit = Decimal("0")
-    total_credit = Decimal("0")
+    total_debit = Decimal("0.00")
+    total_credit = Decimal("0.00")
 
-    for debit, credit in lines:
-        validate_debit_credit(debit, credit)
+    for line in lines:
+        debit, credit = _extract_debit_credit(line)
+
+        validate_debit_credit(
+            debit,
+            credit,
+        )
 
         total_debit += debit
         total_credit += credit
@@ -87,13 +131,6 @@ def validate_balanced_entry(
 def validate_journal_lines(lines) -> None:
     """
     Validate journal-line objects.
-
-    Expected attributes:
-        debit
-        credit
     """
 
-    validate_balanced_entry(
-        (line.debit, line.credit)
-        for line in lines
-    )
+    validate_balanced_entry(lines)
