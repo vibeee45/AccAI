@@ -6,7 +6,21 @@ from app.accounting.normalization import (
     normalize_description,
     normalize_transaction,
 )
-
+from app.accounting.reconciliation import (
+    ReconciliationCheck,
+    ReconciliationError,
+    ReconciliationReport,
+    assert_reconciled,
+    reconcile_all,
+    reconcile_balance_sheet,
+    reconcile_journal_to_ledger,
+    reconcile_journals,
+    reconcile_ledger,
+    reconcile_ledger_to_trial_balance,
+    reconcile_profit_loss,
+    reconcile_trading_account,
+    reconcile_trial_balance,
+)
 from app.accounting.validators import (
     AccountingValidationError,
     validate_balanced_entry,
@@ -145,4 +159,19 @@ __all__ = [
     "get_adjusted_capital",
     "get_total_equity",
     "get_balance_sheet_difference",
+
+        # Reconciliation
+    "ReconciliationCheck",
+    "ReconciliationError",
+    "ReconciliationReport",
+    "assert_reconciled",
+    "reconcile_all",
+    "reconcile_balance_sheet",
+    "reconcile_journal_to_ledger",
+    "reconcile_journals",
+    "reconcile_ledger",
+    "reconcile_ledger_to_trial_balance",
+    "reconcile_profit_loss",
+    "reconcile_trading_account",
+    "reconcile_trial_balance",
 ]
