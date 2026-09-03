@@ -12,6 +12,16 @@ from app.accounting.trial_balance import (
     generate_trial_balance,
     get_trial_balance_row,
 )
+from app.accounting.pnl import (
+    ProfitLoss,
+    ProfitLossError,
+    generate_pnl,
+    generate_pnl_from_trading,
+    get_net_profit,
+    get_net_loss,
+    get_total_income,
+    get_total_expenses,
+)
 from app.accounting.validators import (
     AccountingValidationError,
     validate_balanced_entry,
@@ -75,4 +85,13 @@ __all__ = [
     "TrialBalanceRow",
     "generate_trial_balance",
     "get_trial_balance_row",
+
+    "ProfitLoss",
+    "ProfitLossError",
+    "generate_pnl",
+    "generate_pnl_from_trading",
+    "get_net_profit",
+    "get_net_loss",
+    "get_total_income",
+    "get_total_expenses",
 ]
