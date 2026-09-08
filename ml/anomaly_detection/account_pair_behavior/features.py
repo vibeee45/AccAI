@@ -33,7 +33,10 @@ class AccountPairBehaviorFeatureEngineer:
         occurred_at: datetime,
         history: tuple[AccountPairHistoryItem, ...],
     ) -> AccountPairBehaviorFeatures:
-        if not isinstance(prediction, TransactionPrediction):
+        if not isinstance(
+            prediction,
+            TransactionPrediction,
+        ):
             raise TypeError(
                 "prediction must be TransactionPrediction."
             )
@@ -44,7 +47,9 @@ class AccountPairBehaviorFeatureEngineer:
             )
 
         if not isinstance(history, tuple):
-            raise TypeError("history must be a tuple.")
+            raise TypeError(
+                "history must be a tuple."
+            )
 
         relevant_history = self._previous_history(
             prediction.transaction_id,
@@ -104,7 +109,10 @@ class AccountPairBehaviorFeatureEngineer:
             )
 
         for item in history:
-            if not isinstance(item, AccountPairHistoryItem):
+            if not isinstance(
+                item,
+                AccountPairHistoryItem,
+            ):
                 raise TypeError(
                     "history must contain "
                     "AccountPairHistoryItem objects."
